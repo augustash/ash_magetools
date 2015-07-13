@@ -8,7 +8,7 @@
  * @license     LICENSE.txt (MIT)
  */
 
-require_once 'abstract.php';
+require_once realpath(dirname(__FILE__) . '/../../../shell/') . '/abstract.php';
 
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Output\ConsoleOutput;
