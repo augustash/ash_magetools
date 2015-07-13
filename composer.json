@@ -9,6 +9,10 @@
             "email": "pmcwilliams@augustash.com"
         }
     ],
+    "require": {
+        "php": ">=5.3",
+        "symfony/console": "^3.0@dev"
+    },
     "bin": [
         "composer.phar",
         "modman",
