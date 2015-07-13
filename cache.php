@@ -119,7 +119,7 @@ class Ash_Shell_Cache extends Mage_Shell_Abstract
             Mage::app()->getCacheInstance()->flush();
             echo "The cache storage has been flushed.\n";
         } catch (Exception $e) {
-            sprintf("Exception:\n%s\n", $e->getMessage());
+            echo "Exception:\n{$e->getMessage()}\n";
         }
 
         return $this;
@@ -136,7 +136,7 @@ class Ash_Shell_Cache extends Mage_Shell_Abstract
             Mage::app()->cleanCache();
             echo "The cache has been cleaned.\n";
         } catch (Exception $e) {
-            sprintf("Exception:\n%s\n", $e->getMessage());
+            echo "Exception:\n{$e->getMessage()}\n";
         }
 
         return $this;
@@ -165,12 +165,12 @@ class Ash_Shell_Cache extends Mage_Shell_Abstract
                 Mage::app()->getCacheInstance()->cleanType($type);
                 $refreshCount++;
             } catch (Exception $e) {
-                sprintf("%s cache error:\n%s\n", $type, $e->getMessage());
+                echo "{$type} cache error:\n{$e->getMessage()}\n";
             }
         }
 
         if ($refreshCount > 0) {
-            sprintf("%s cache type(s) refreshed.\n", $refreshCount);
+            echo "{$refreshCount} cache type(s) refreshed.\n";
         }
 
         return $this;
@@ -188,7 +188,7 @@ class Ash_Shell_Cache extends Mage_Shell_Abstract
             Mage::dispatchEvent('clean_media_cache_after');
             echo "The JavaScript/CSS cache has been cleaned.\n";
         } catch (Exception $e) {
-            sprintf("Exception:\n%s\n", $e->getMessage());
+            echo "Exception:\n{$e->getMessage()}\n";
         }
 
         return $this;
@@ -206,7 +206,7 @@ class Ash_Shell_Cache extends Mage_Shell_Abstract
             Mage::dispatchEvent('clean_catalog_images_cache_after');
             echo "The image cache has been cleaned.\n";
         } catch (Exception $e) {
-            sprintf("Exception:\n%s\n", $e->getMessage());
+            echo "Exception:\n{$e->getMessage()}\n";
         }
 
         return $this;
@@ -220,7 +220,7 @@ class Ash_Shell_Cache extends Mage_Shell_Abstract
      */
     public function enable(array $types)
     {
-        $availableTypes = $this->_getCacheTypes();
+        $availableTypes = Mage::app()->useCache();
         $enabledCount   = 0;
 
         foreach ($types as $type) {
@@ -232,7 +232,7 @@ class Ash_Shell_Cache extends Mage_Shell_Abstract
 
         if ($enabledCount > 0) {
             Mage::app()->saveUseCache($availableTypes);
-            sprintf("%s cache type(s) enabled.\n", $enabledCount);
+            echo "{$enabledCount} cache type(s) enabled.\n";
         }
 
         return $this;
@@ -246,7 +246,7 @@ class Ash_Shell_Cache extends Mage_Shell_Abstract
      */
     public function disable($types)
     {
-        $availableTypes = $this->_getCacheTypes();
+        $availableTypes = Mage::app()->useCache();
         $disabledCount  = 0;
 
         foreach ($types as $type) {
@@ -259,7 +259,7 @@ class Ash_Shell_Cache extends Mage_Shell_Abstract
 
         if ($disabledCount > 0) {
             Mage::app()->saveUseCache($availableTypes);
-            sprintf("%s cache type(s) disabled.\n", $disabledCount);
+            echo "{$disabledCount} cache type(s) disabled.\n";
         }
 
         return $this;
@@ -360,3 +360,4 @@ USAGE;
 
 $shell = new Ash_Shell_Cache();
 $shell->run();
+
