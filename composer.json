@@ -10,8 +10,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3",
-        "symfony/console": "^3.0@dev"
+        "php": ">=5.3.2",
+        "symfony/console": "^2.5"
     },
     "bin": [
         "cache.php",
